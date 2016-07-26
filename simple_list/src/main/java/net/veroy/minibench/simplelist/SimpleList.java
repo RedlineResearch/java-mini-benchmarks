@@ -57,6 +57,6 @@ public class SimpleList
         System.out.println( "    number             number of elements in LinkedList\n" );
         System.out.println( "    reps               how many repetitions of creating LinkedList\n" );
         System.out.println( "    size               how big (in bytes) a Node of the LinkedList is\n" );
-        return 0;
+        return;
     }
 }
