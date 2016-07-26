@@ -52,5 +52,11 @@ public class SimpleList
 
     private static void print_help()
     {
+        System.out.println( "usage: number reps size\n\n" );
+        System.out.println( "positional arguments:\n" );
+        System.out.println( "    number             number of elements in LinkedList\n" );
+        System.out.println( "    reps               how many repetitions of creating LinkedList\n" );
+        System.out.println( "    size               how big (in bytes) a Node of the LinkedList is\n" );
+        return 0;
     }
 }
