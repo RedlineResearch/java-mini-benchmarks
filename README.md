@@ -1,7 +1,7 @@
 # Java Mini Benchmarks
 These are mini Java benchmarks we use in our research.
 
-# SimpleList benchmark
+### SimpleList benchmark
 
 Running the following command prints out the command line usage:
 
