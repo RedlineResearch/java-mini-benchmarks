@@ -15,6 +15,10 @@ public class SimpleList
         int reps = 0;
         int node_size = 0;
         // First argument is number of elements in LinkedList
+        if (args.length != 3) {
+            print_help();
+            System.exit(1);
+        }
         try {
             number = Integer.parseInt(args[0]);
         } catch (NumberFormatException e) {
@@ -39,11 +43,8 @@ public class SimpleList
         for (int iter = 0; iter < reps; iter++) {
             for (int i = 0; i < number; i++) {
                 mylist.add(new Node(node_size));
-                if ((i % 10) == 1) {
-                    mylist.remove();
-                }
             }
-            System.out.println("Run[ " + iter + " ] -->  length: " + mylist.size());
+            // System.out.println("Run[ " + iter + " ] -->  length: " + mylist.size());
             while (!mylist.isEmpty()) {
                 mylist.remove();
             }
@@ -52,11 +53,11 @@ public class SimpleList
 
     private static void print_help()
     {
-        System.out.println( "usage: number reps size\n\n" );
-        System.out.println( "positional arguments:\n" );
-        System.out.println( "    number             number of elements in LinkedList\n" );
-        System.out.println( "    reps               how many repetitions of creating LinkedList\n" );
-        System.out.println( "    size               how big (in bytes) a Node of the LinkedList is\n" );
+        System.out.println( "usage: number reps size\n" );
+        System.out.println( "positional arguments:" );
+        System.out.println( "    number             number of elements in LinkedList" );
+        System.out.println( "    reps               number of repetitions of creating LinkedList" );
+        System.out.println( "    size               size (in bytes) of a LinkedList Node" );
         return;
     }
 }
