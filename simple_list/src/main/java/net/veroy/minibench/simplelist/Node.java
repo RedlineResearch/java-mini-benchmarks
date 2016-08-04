@@ -7,10 +7,10 @@ package net.veroy.minibench.simplelist;
 
 public class Node
 {
-    public int[] buffer;
+    public int value;
 
     public Node( int newNumber )
     {
-        buffer = new int[newNumber];
+        value = newNumber;
     }
 }

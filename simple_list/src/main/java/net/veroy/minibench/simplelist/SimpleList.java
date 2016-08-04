@@ -13,9 +13,8 @@ public class SimpleList
     {
         int number = 0;
         int reps = 0;
-        int node_size = 0;
         // First argument is number of elements in LinkedList
-        if (args.length != 3) {
+        if (args.length != 2) {
             print_help();
             System.exit(1);
         }
@@ -32,19 +31,11 @@ public class SimpleList
             System.err.println( "Argument " + args[1] + " not an integer." );
             System.exit(1);
         }
-        // Third argument is how big the Node array is.
-        try {
-            node_size = Integer.parseInt(args[2]);
-        } catch (NumberFormatException e) {
-            System.err.println( "Argument " + args[2] + " not an integer." );
-            System.exit(1);
-        }
         LinkedList mylist = new LinkedList();
         for (int iter = 0; iter < reps; iter++) {
             for (int i = 0; i < number; i++) {
-                mylist.add(new Node(node_size));
+                mylist.add(new Node(i));
             }
-            // System.out.println("Run[ " + iter + " ] -->  length: " + mylist.size());
             while (!mylist.isEmpty()) {
                 mylist.remove();
             }
@@ -53,11 +44,10 @@ public class SimpleList
 
     private static void print_help()
     {
-        System.out.println( "usage: number reps size\n" );
+        System.out.println( "usage: number reps\n" );
         System.out.println( "positional arguments:" );
         System.out.println( "    number             number of elements in LinkedList" );
         System.out.println( "    reps               number of repetitions of creating LinkedList" );
-        System.out.println( "    size               size (in bytes) of a LinkedList Node" );
         return;
     }
 }
