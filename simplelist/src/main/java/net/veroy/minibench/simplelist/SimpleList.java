@@ -107,8 +107,8 @@ public class SimpleList
                 assert(position >= 0);
             }
         }
-        // Add at that position
         // System.out.println( "Added: " + value + " in position: " + position );
+        // Add at that position
         mylist.add(position, value);
     }
 
@@ -150,7 +150,8 @@ public class SimpleList
             // Destroy it
             while (!mylist.isEmpty()) {
                 Integer cur = mylist.remove();
-                System.out.println(cur);
+                // System.out.println(cur);
+                // TODO: Sequential or All at once at end delete?
             }
         }
     }
@@ -161,7 +162,7 @@ public class SimpleList
         System.out.println( "positional arguments:" );
         System.out.println( "    number             number of elements in LinkedList" );
         System.out.println( "    reps               number of repetitions of creating LinkedList" );
-        System.out.println( "    seq/random        Sequentially insert (or randomly insert) in list" );
+        System.out.println( "    seq/random         Sequentially insert (or randomly insert) in list" );
         System.out.println( "    seqdel/atend       Sequentially delete nodes.(Or delete list all at once)" );
         return;
     }
