@@ -132,18 +132,18 @@ public class SimpleList
         // Second argument is how many times to create the linked list
         int reps = get_reps_option(args[1]);
         // Third argument selects between seq/random
-        boolean seqFlag = get_random_option(args[3]);
+        boolean randomFlag = get_random_option(args[2]);
         // Fourth argument selects between  seqdel/atend
-        boolean atEndFlag = get_at_end_option(args[4]);
+        boolean atEndFlag = get_at_end_option(args[3]);
         LinkedList<Integer> mylist = new LinkedList<Integer>();
         for (int iter = 0; iter < reps; iter++) {
             // Create the list
-            if (seqFlag) {
-                create_list_sequential( mylist,
-                                        number );
-            } else {
+            if (randomFlag) {
                 create_list_random( mylist,
                                     number );
+            } else {
+                create_list_sequential( mylist,
+                                        number );
             }
             // Destroy it
             while (!mylist.isEmpty()) {
