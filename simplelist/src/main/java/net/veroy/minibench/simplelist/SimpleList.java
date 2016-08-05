@@ -5,8 +5,8 @@ package net.veroy.minibench.simplelist;
  *
  */
 import java.util.LinkedList;
-import net.veroy.minibench.simplelist.Node;
-import net.veroy.minibench.simplelist.NodeInteger;
+import java.util.Iterator;
+import java.util.Random;
 
 public class SimpleList
 {
@@ -76,10 +76,54 @@ public class SimpleList
         return false;
     }
 
+    private static void create_list_sequential( LinkedList<Integer> mylist,
+                                                int number )
+    {
+        for (int i = 0; i < number; i++) {
+            mylist.add(new Integer(i));
+        }
+    }
+
+    private static void add_to_list_order( Integer value,
+                                           LinkedList<Integer> mylist )
+    {
+        // Check for easy empty list
+        if (mylist.size() == 0) {
+            mylist.add(value);
+            return;
+        } // else
+        // Find position
+        Iterator<Integer> iter = mylist.iterator();
+        int position = 0;
+        Integer curvalue = 0;
+        boolean done = false;
+        while (!done && iter.hasNext()) {
+            curvalue = iter.next();
+            ++position;
+            if (value < curvalue) {
+                done = true;
+                --position;
+                assert(position >= 0);
+            }
+        }
+        // Add at that position
+        mylist.add(value, position);
+    }
+
+    private static void create_list_random( LinkedList<Integer> mylist,
+                                            int number )
+    {
+        Random rand = new Random();
+        for (int i = 0; i < number; i++) {
+            add_to_list_order( new Integer( rand.nextInt(number * 100) ),
+                               mylist );
+        }
+    }
+
     public static void main( String[] args )
     {
         // Check for positional arguments
-        if (args.length != 5) {
+        if (args.length != 4) {
             print_help();
             System.exit(1);
         }
@@ -87,22 +131,21 @@ public class SimpleList
         int number = get_number_option(args[0]);
         // Second argument is how many times to create the linked list
         int reps = get_reps_option(args[1]);
-        // Third argument selects between int and Integer
-        boolean useInteger = get_integer_option(args[2]);
-        // Fourth argument selects between seq/random
+        // Third argument selects between seq/random
         boolean seqFlag = get_random_option(args[3]);
-        // Fifth argument selects between  seqdel/atend
+        // Fourth argument selects between  seqdel/atend
         boolean atEndFlag = get_at_end_option(args[4]);
-        LinkedList mylist = new LinkedList();
-        // TODO Call different function for SEQ vs RANDOM
+        LinkedList<Integer> mylist = new LinkedList<Integer>();
         for (int iter = 0; iter < reps; iter++) {
-            for (int i = 0; i < number; i++) {
-                if (useInteger) {
-                    mylist.add(new NodeInteger(i));
-                } else {
-                    mylist.add(new Node(i));
-                }
+            // Create the list
+            if (seqFlag) {
+                create_list_sequential( mylist,
+                                        number );
+            } else {
+                create_list_random( mylist,
+                                    number );
             }
+            // Destroy it
             while (!mylist.isEmpty()) {
                 mylist.remove();
             }
