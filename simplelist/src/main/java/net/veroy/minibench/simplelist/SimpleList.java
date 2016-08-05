@@ -6,6 +6,7 @@ package net.veroy.minibench.simplelist;
  */
 import java.util.LinkedList;
 import net.veroy.minibench.simplelist.Node;
+import net.veroy.minibench.simplelist.NodeInteger;
 
 public class SimpleList
 {
@@ -93,9 +94,14 @@ public class SimpleList
         // Fifth argument selects between  seqdel/atend
         boolean atEndFlag = get_at_end_option(args[4]);
         LinkedList mylist = new LinkedList();
+        // TODO Call different function for SEQ vs RANDOM
         for (int iter = 0; iter < reps; iter++) {
             for (int i = 0; i < number; i++) {
-                mylist.add(new Node(i));
+                if (useInteger) {
+                    mylist.add(new NodeInteger(i));
+                } else {
+                    mylist.add(new Node(i));
+                }
             }
             while (!mylist.isEmpty()) {
                 mylist.remove();
