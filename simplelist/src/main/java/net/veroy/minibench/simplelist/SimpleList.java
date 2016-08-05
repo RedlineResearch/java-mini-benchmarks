@@ -50,9 +50,9 @@ public class SimpleList
 
     private static boolean get_random_option(String arg)
     {
-        if (arg.toUpperCase() == "SEQ") {
+        if (arg.toUpperCase().equals("SEQ")) {
             return false;
-        } else if (arg.toUpperCase() == "RANDOM") {
+        } else if (arg.toUpperCase().equals("RANDOM")) {
             return true;
         } else {
             System.err.println( "Invalid option: " + arg );
@@ -64,9 +64,9 @@ public class SimpleList
 
     private static boolean get_at_end_option(String arg)
     {
-        if (arg.toUpperCase() == "SEQDEL") {
+        if (arg.toUpperCase().equals("SEQDEL")) {
             return false;
-        } else if (arg.toUpperCase() == "ATEND") {
+        } else if (arg.toUpperCase().equals("ATEND")) {
             return true;
         } else {
             System.err.println( "Invalid option: " + arg );
@@ -89,6 +89,7 @@ public class SimpleList
     {
         // Check for easy empty list
         if (mylist.size() == 0) {
+            // System.out.println( "Added: " + value );
             mylist.add(value);
             return;
         } // else
@@ -107,7 +108,8 @@ public class SimpleList
             }
         }
         // Add at that position
-        mylist.add(value, position);
+        // System.out.println( "Added: " + value + " in position: " + position );
+        mylist.add(position, value);
     }
 
     private static void create_list_random( LinkedList<Integer> mylist,
@@ -147,18 +149,18 @@ public class SimpleList
             }
             // Destroy it
             while (!mylist.isEmpty()) {
-                mylist.remove();
+                Integer cur = mylist.remove();
+                System.out.println(cur);
             }
         }
     }
 
     private static void print_help()
     {
-        System.out.println( "usage: number reps\n" );
+        System.out.println( "usage: number reps SEQ/RANDOM SEQDEL/ATEND\n" );
         System.out.println( "positional arguments:" );
         System.out.println( "    number             number of elements in LinkedList" );
         System.out.println( "    reps               number of repetitions of creating LinkedList" );
-        System.out.println( "    int/Integer        Use primitive type int (or class Integer) as value in nodes" );
         System.out.println( "    seq/random        Sequentially insert (or randomly insert) in list" );
         System.out.println( "    seqdel/atend       Sequentially delete nodes.(Or delete list all at once)" );
         return;
