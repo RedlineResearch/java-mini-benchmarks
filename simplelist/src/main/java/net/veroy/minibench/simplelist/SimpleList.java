@@ -148,10 +148,13 @@ public class SimpleList
                                         number );
             }
             // Destroy it
-            while (!mylist.isEmpty()) {
-                Integer cur = mylist.remove();
-                // System.out.println(cur);
-                // TODO: Sequential or All at once at end delete?
+            if (atEndFlag) {
+                mylist = null;
+            } else {
+                while (!mylist.isEmpty()) {
+                    Integer cur = mylist.remove();
+                    // System.out.println(cur);
+                }
             }
         }
     }
