@@ -151,9 +151,11 @@ public class SimpleList
             if (atEndFlag) {
                 mylist = null;
             } else {
+                Integer total = 0;
                 while (!mylist.isEmpty()) {
                     Integer cur = mylist.remove();
                     // System.out.println(cur);
+                    total += cur;
                 }
             }
         }
