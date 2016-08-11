@@ -38,9 +38,9 @@ public class SimpleList
 
     private static boolean get_integer_option(String arg)
     {
-        if (arg.toUpperCase() == "INTEGER") {
+        if (arg.toUpperCase().equals("INTEGER")) {
             return true;
-        } else if (arg.toUpperCase() == "NODE") {
+        } else if (arg.toUpperCase().equals("NODE")) {
             return false;
         } else {
             System.err.println( "Invalid option: " + arg );
