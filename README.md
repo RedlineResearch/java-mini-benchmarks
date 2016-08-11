@@ -26,5 +26,5 @@ positional arguments:
                                     - RANDOM is random insert into a sorted list
     SEQDEL/ATEND       delete modes - SEQDEL is deleting the elements sequentially
                                     - ATEND is simply nulling out the list at the end
-    NODE/INTEGER
+    NODE/INTEGER       element type (class Node or Integer)
 ```
