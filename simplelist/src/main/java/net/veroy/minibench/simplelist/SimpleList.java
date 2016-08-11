@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.Random;
 
+import net.veroy.minibench.simplelist.Node;
+
 public class SimpleList
 {
     private static int get_number_option(String arg)
@@ -38,7 +40,7 @@ public class SimpleList
     {
         if (arg.toUpperCase() == "INTEGER") {
             return true;
-        } else if (arg.toUpperCase() == "INT") {
+        } else if (arg.toUpperCase() == "NODE") {
             return false;
         } else {
             System.err.println( "Invalid option: " + arg );
@@ -76,8 +78,11 @@ public class SimpleList
         return false;
     }
 
-    private static void create_list_sequential( LinkedList<Integer> mylist,
-                                                int number )
+    // ----------------------------------------------------------------------
+    // Integer helper functions
+    // ----------------------------------------------------------------------
+    private static void create_list_sequential_integer( LinkedList<Integer> mylist,
+                                                        int number )
     {
         for (int i = 0; i < number; i++) {
             mylist.add(new Integer(i));
@@ -112,8 +117,8 @@ public class SimpleList
         mylist.add(position, value);
     }
 
-    private static void create_list_random( LinkedList<Integer> mylist,
-                                            int number )
+    private static void create_list_random_integer( LinkedList<Integer> mylist,
+                                                    int number )
     {
         Random rand = new Random();
         for (int i = 0; i < number; i++) {
@@ -122,10 +127,62 @@ public class SimpleList
         }
     }
 
+    // ----------------------------------------------------------------------
+    // Node helper functions
+    // ----------------------------------------------------------------------
+    private static void create_list_sequential_node( LinkedList<Node> mylist,
+                                                     int number )
+    {
+        for (int i = 0; i < number; i++) {
+            mylist.add(new Node(new Integer(i)));
+        }
+    }
+
+    private static void add_to_list_order( Node newnode,
+                                           LinkedList<Node> mylist )
+    {
+        // Check for easy empty list
+        if (mylist.size() == 0) {
+            mylist.add(newnode);
+            return;
+        } // else
+        // Find position
+        Iterator<Node> iter = mylist.iterator();
+        int position = 0;
+        Integer curvalue = 0;
+        Node curnode;
+        Integer value = newnode.getValue();
+        boolean done = false;
+        while (!done && iter.hasNext()) {
+            curnode = iter.next();
+            curvalue = curnode.getValue();
+            ++position;
+            if (value < curvalue) {
+                done = true;
+                --position;
+                assert(position >= 0);
+            }
+        }
+        // Add at that position
+        mylist.add(position, newnode);
+    }
+
+    private static void create_list_random_node( LinkedList<Node> mylist,
+                                                 int number )
+    {
+        Random rand = new Random();
+        for (int i = 0; i < number; i++) {
+            add_to_list_order( new Node( new Integer( rand.nextInt(number * 100) ) ),
+                               mylist );
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // MAIN
     public static void main( String[] args )
     {
         // Check for positional arguments
-        if (args.length != 4) {
+        if (args.length != 5) {
             print_help();
             System.exit(1);
         }
@@ -137,25 +194,55 @@ public class SimpleList
         boolean randomFlag = get_random_option(args[2]);
         // Fourth argument selects between  seqdel/atend
         boolean atEndFlag = get_at_end_option(args[3]);
-        LinkedList<Integer> mylist = new LinkedList<Integer>();
-        for (int iter = 0; iter < reps; iter++) {
-            // Create the list
-            if (randomFlag) {
-                create_list_random( mylist,
-                                    number );
-            } else {
-                create_list_sequential( mylist,
-                                        number );
+        // Fifth argument selects Integer vs Node
+        boolean integerFlag = get_integer_option(args[4]);
+
+        if (integerFlag) {
+            LinkedList<Integer> mylist = new LinkedList<Integer>();
+            for (int iter = 0; iter < reps; iter++) {
+                // Create the list
+                if (randomFlag) {
+                    create_list_random_integer( mylist,
+                                                number );
+                } else {
+                    create_list_sequential_integer( mylist,
+                                                    number );
+                }
+                // Destroy it
+                if (atEndFlag) {
+                    mylist = null;
+                } else {
+                    Integer total = 0;
+                    while (!mylist.isEmpty()) {
+                        Integer cur = mylist.remove();
+                        // System.out.println(cur);
+                        total += cur;
+                    }
+                }
             }
-            // Destroy it
-            if (atEndFlag) {
-                mylist = null;
-            } else {
-                Integer total = 0;
-                while (!mylist.isEmpty()) {
-                    Integer cur = mylist.remove();
-                    // System.out.println(cur);
-                    total += cur;
+        } else {
+            LinkedList<Node> mylist = new LinkedList<Node>();
+            for (int iter = 0; iter < reps; iter++) {
+                // Create the list
+                if (randomFlag) {
+                    create_list_random_node( mylist,
+                                             number );
+                } else {
+                    create_list_sequential_node( mylist,
+                                                 number );
+                }
+                // Destroy it
+                if (atEndFlag) {
+                    mylist = null;
+                } else {
+                    Integer total = 0;
+                    Integer value;
+                    while (!mylist.isEmpty()) {
+                        Node curnode = mylist.remove();
+                        // System.out.println(cur);
+                        value = curnode.getValue();
+                        total += value;
+                    }
                 }
             }
         }
@@ -169,6 +256,7 @@ public class SimpleList
         System.out.println( "    reps               number of repetitions of creating LinkedList" );
         System.out.println( "    seq/random         Sequentially insert (or randomly insert) in list" );
         System.out.println( "    seqdel/atend       Sequentially delete nodes.(Or delete list all at once)" );
+        System.out.println( "    integer/node       Use Integer or Node as the element in the list." );
         return;
     }
 }
