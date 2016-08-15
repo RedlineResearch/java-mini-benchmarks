@@ -64,12 +64,26 @@ public class SimpleList
         return false;
     }
 
-    private static boolean get_at_end_option(String arg)
+    // private static boolean get_at_end_option(String arg)
+    // {
+    //     if (arg.toUpperCase().equals("SEQDEL")) {
+    //         return false;
+    //     } else if (arg.toUpperCase().equals("ATEND")) {
+    //         return true;
+    //     } else {
+    //         System.err.println( "Invalid option: " + arg );
+    //         print_help();
+    //         System.exit(1);
+    //     }
+    //     return false;
+    // }
+
+    private static boolean get_use_option(String arg)
     {
-        if (arg.toUpperCase().equals("SEQDEL")) {
-            return false;
-        } else if (arg.toUpperCase().equals("ATEND")) {
+        if (arg.toUpperCase().equals("USE")) {
             return true;
+        } else if (arg.toUpperCase().equals("DONTUSE")) {
+            return false;
         } else {
             System.err.println( "Invalid option: " + arg );
             print_help();
@@ -192,10 +206,12 @@ public class SimpleList
         int reps = get_reps_option(args[1]);
         // Third argument selects between seq/random
         boolean randomFlag = get_random_option(args[2]);
-        // Fourth argument selects between  seqdel/atend
-        boolean atEndFlag = get_at_end_option(args[3]);
+        // Fourth argument selects UseNode vs Don't Use Node
+        boolean useFlag = get_use_option(args[3]);
         // Fifth argument selects Integer vs Node
         boolean integerFlag = get_integer_option(args[4]);
+        // ????? argument selects between  seqdel/atend
+        // TODO boolean atEndFlag = get_at_end_option(args[3]);
 
         if (integerFlag) {
             LinkedList<Integer> mylist = new LinkedList<Integer>();
@@ -208,17 +224,27 @@ public class SimpleList
                     create_list_sequential_integer( mylist,
                                                     number );
                 }
-                // Destroy it
-                if (atEndFlag) {
-                    mylist = null;
-                } else {
-                    Integer total = 0;
-                    while (!mylist.isEmpty()) {
+                Integer total = 0;
+                while (!mylist.isEmpty()) {
+                    // System.out.println(cur);
+                    if (useFlag) {
                         Integer cur = mylist.remove();
-                        // System.out.println(cur);
                         total += cur;
+                    } else {
+                        mylist.remove();
                     }
                 }
+                // ATEND Option  Destroy it
+                // if (atEndFlag) {
+                //     mylist = null;
+                // } else {
+                //     Integer total = 0;
+                //     while (!mylist.isEmpty()) {
+                //         Integer cur = mylist.remove();
+                //         // System.out.println(cur);
+                //         total += cur;
+                //     }
+                // }
             }
         } else {
             LinkedList<Node> mylist = new LinkedList<Node>();
@@ -231,19 +257,27 @@ public class SimpleList
                     create_list_sequential_node( mylist,
                                                  number );
                 }
-                // Destroy it
-                if (atEndFlag) {
-                    mylist = null;
-                } else {
-                    Integer total = 0;
-                    Integer value;
-                    while (!mylist.isEmpty()) {
+                Integer total = 0;
+                while (!mylist.isEmpty()) {
+                    // System.out.println(cur);
+                    if (useFlag) {
                         Node curnode = mylist.remove();
-                        // System.out.println(cur);
-                        value = curnode.getValue();
-                        total += value;
+                        total += curnode.getValue();
+                    } else {
+                        mylist.remove();
                     }
                 }
+                // ATEND Option  Destroy it
+                // if (atEndFlag) {
+                //     mylist = null;
+                // } else {
+                //     Integer total = 0;
+                //     while (!mylist.isEmpty()) {
+                //         Integer cur = mylist.remove();
+                //         // System.out.println(cur);
+                //         total += cur;
+                //     }
+                // }
             }
         }
     }
