@@ -291,6 +291,9 @@ public class SimpleList
         System.out.println( "    seq/random         Sequentially insert (or randomly insert) in list" );
         System.out.println( "    seqdel/atend       Sequentially delete nodes.(Or delete list all at once)" );
         System.out.println( "    integer/node       Use Integer or Node as the element in the list." );
+        // TODO TODO TODO 
+        // The documentation of the print_help is incorrect.
+        // TODO TODO TODO 
         return;
     }
 }
