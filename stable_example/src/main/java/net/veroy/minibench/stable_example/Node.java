@@ -18,4 +18,9 @@ public class Node
     {
         return mynode.getValue();
     }
+
+    public void removeEndNode()
+    {
+        mynode = null;
+    }
 }

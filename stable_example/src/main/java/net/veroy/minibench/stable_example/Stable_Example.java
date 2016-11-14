@@ -11,7 +11,8 @@ import net.veroy.minibench.stable_example.EndNode;
 
 public class Stable_Example
 {
-    private static Node node_g;
+    private static Node stable_g;
+    private static Node unstable_g;
 
     private static int get_reps_option(String arg)
     {
@@ -30,7 +31,7 @@ public class Stable_Example
     public static void main( String[] args )
     {
         // Check for positional arguments
-        if (args.length != 2) {
+        if (args.length != 1) {
             print_help();
             System.exit(1);
         }
@@ -39,17 +40,22 @@ public class Stable_Example
 
         Integer total = 0;
         for (int index = 0; index < reps; index++) {
-            node_g = new Node( new EndNode(index) );
-            Node curnode = node_g;
-            total += curnode.getValue();
-            node_g = null;
+            // Stable
+            stable_g = new Node( new EndNode(index) );
+            total += stable_g.getValue();
+            stable_g = null;
+            // Unstable
+            unstable_g = new Node( new EndNode((index + 1) * 100));
+            total += unstable_g.getValue();
+            unstable_g.removeEndNode();
+            unstable_g = null;
         }
         System.out.println("Total: " + total);
     }
 
     private static void print_help()
     {
-        System.out.println( "usage: number reps SEQ/RANDOM SEQDEL/ATEND\n" );
+        System.out.println( "usage: reps\n" );
         System.out.println( "positional arguments:" );
         System.out.println( "    reps               number of repetitions of creating LinkedList" );
         return;
