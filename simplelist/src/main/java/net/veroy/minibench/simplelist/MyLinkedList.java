@@ -26,11 +26,17 @@ public class MyLinkedList
             prev = iter;
             iter = iter.next;
         }
+        prev.next = newnode;
     }
 
     public void next()
     {
         // Move the current reference to the next Node if it exists.
         this.current = this.current.next;
+    }
+
+    public boolean isEmpty()
+    {
+        return (this.current == null);
     }
 }
