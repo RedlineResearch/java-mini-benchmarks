@@ -20,13 +20,17 @@ public class MyLinkedList
     {
         // Search for end and add there.
         // This is basically an append
-        Node iter = this.current.next;
-        Node prev = this.current;
-        while (iter != null) {
-            prev = iter;
-            iter = iter.next;
+        if (this.current == null) {
+            this.current = newnode;
+        } else {
+            Node iter = this.current.next;
+            Node prev = this.current;
+            while (iter != null) {
+                prev = iter;
+                iter = iter.next;
+            }
+            prev.next = newnode;
         }
-        prev.next = newnode;
     }
 
     public void next()
