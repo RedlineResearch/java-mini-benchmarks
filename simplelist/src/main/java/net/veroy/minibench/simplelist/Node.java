@@ -8,6 +8,7 @@ package net.veroy.minibench.simplelist;
 public class Node
 {
     public Integer value;
+    public Node next;
 
     public Node( Integer newNumber )
     {
@@ -19,3 +20,4 @@ public class Node
         return value;
     }
 }
+
