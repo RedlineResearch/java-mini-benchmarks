@@ -16,6 +16,8 @@ public class MyLinkedList
     public MyLinkedList()
     {
         // Always a cycle
+        this.head = new Node(0xdeadbeef);
+        this.end= new Node(0xbeefdead);
         this.head.setNext(end);
         this.end.setNext(head);
         this.current = head;
@@ -31,28 +33,44 @@ public class MyLinkedList
         return (this.end == mynode);
     }
 
+    public boolean moveNext()
+    {
+        Node mynext = this.current.getNext();
+        assert( mynext != this.head );
+        if (mynext != this.end) {
+            this.current = mynext;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void resetCurrent()
+    {
+        this.current = this.head;
+    }
+
     private boolean sanity_check()
     {
-        return (this.end.getNext() == this.head);
+        return ( (this.end.getNext() == this.head) &&
+                 (this.current != this.end) );
     }
 
     public void add( Node newnode )
     {
-        // Search for node that cycles back to head and add there.
-        Node prev = this.end;
-        Node current = this.head;
-        while (current.getNext() != this.end) {
-            prev = current;
-            current = current.getNext();
-        }
-        assert( current.getNext() == this.end );
-        prev = current;
+        // Add at current
+        Node oldnext = this.current.getNext();
         current.setNext( newnode );
-        newnode.setNext( this.end );
+        newnode.setNext( oldnext );
     }
 
     public boolean isEmpty()
     {
         return (this.head.getNext() == this.end);
+    }
+
+    public boolean atEnd()
+    {
+        return (this.current.getNext() == this.end);
     }
 }

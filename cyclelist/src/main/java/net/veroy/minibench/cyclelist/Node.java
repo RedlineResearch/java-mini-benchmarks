@@ -10,11 +10,9 @@ public class Node
     public Integer value;
     public Node next;
 
-    public Node( Integer new_number,
-                 Node next_node )
+    public Node( Integer new_number )
     {
         this.value = new_number;
-        this.next = next_node;
     }
 
     public void setNext( Node next_node )

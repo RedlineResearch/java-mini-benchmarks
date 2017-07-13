@@ -9,9 +9,9 @@ sourceCompatibility = 1.6
 version = '0.1'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'simplelist',
+        attributes 'Implementation-Title': 'cyclelist',
                    'Implementation-Version': version,
-                   'Main-Class': 'net.veroy.minibench.simplelist.SimpleList'
+                   'Main-Class': 'net.veroy.minibench.cyclelist.CycleList'
     }
 }
 
