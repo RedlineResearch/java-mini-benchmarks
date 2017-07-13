@@ -1,14 +1,14 @@
-package net.veroy.minibench.simplelist;
+package net.veroy.minibench.cyclelist;
 
 /**
  * Simple singly linked list example
  * We use our own implementation of a singly linked list
  *
  */
-import net.veroy.minibench.simplelist.Node;
-import net.veroy.minibench.simplelist.MyLinkedList;
+import net.veroy.minibench.cyclelist.Node;
+import net.veroy.minibench.cyclelist.MyLinkedList;
 
-public class SimpleList
+public class CycleList
 {
     private static int get_number_option(String arg)
     {
