@@ -69,7 +69,7 @@ public class StackOnly
         Integer total = 0;
 
         for (int iter = 0; iter < number; iter++) {
-            Node n = new Node(100); // It doesn't matter what the value is.
+            Node n = new Node(100 + iter); // It doesn't matter what the value is.
             total += n.getValue();
         }
         System.out.println( "Total: " + total );

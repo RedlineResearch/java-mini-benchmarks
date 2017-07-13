@@ -70,7 +70,7 @@ public class SimpleList
                 total += mylist.current.getValue();
                 mylist.next();
             }
-            // System.out.println( "Total: " + total );
+            System.out.println( "Total: " + total );
         }
     }
 
