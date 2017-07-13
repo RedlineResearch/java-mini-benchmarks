@@ -1,11 +1,11 @@
-package net.veroy.minibench.simplelist;
+package net.veroy.minibench.cyclelist;
 
 /**
- * SimpleList
+ * CycleList
  *
  */
 
-import net.veroy.minibench.simplelist.Node;
+import net.veroy.minibench.cyclelist.Node;
 
 public class MyLinkedList
 {

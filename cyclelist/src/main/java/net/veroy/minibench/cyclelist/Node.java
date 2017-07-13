@@ -1,7 +1,7 @@
-package net.veroy.minibench.simplelist;
+package net.veroy.minibench.cyclelist;
 
 /**
- * Node for SimpleList
+ * Node for CycleList
  *
  */
 
@@ -13,7 +13,7 @@ public class Node
     public Node( Integer new_number,
                  Node next_node )
     {
-        this.value = newNumber;
+        this.value = new_number;
         this.next = next_node;
     }
 
